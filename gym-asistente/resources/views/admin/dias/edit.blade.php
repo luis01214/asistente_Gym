@@ -37,6 +37,52 @@
         </select>
     </div>
 
+    <hr>
+    <h4>Ejercicios existentes</h4>
+
+    @foreach ($dia->ejercicios as $i => $ejercicio)
+        <div class="mb-3 border p-3 rounded bg-light">
+            <input type="hidden" name="ejercicios[{{ $i }}][id]" value="{{ $ejercicio->id }}">
+
+            <div class="mb-2">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="ejercicios[{{ $i }}][nombre]" value="{{ $ejercicio->nombre }}" required>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Series</label>
+                <input type="text" class="form-control" name="ejercicios[{{ $i }}][series]" value="{{ $ejercicio->series }}">
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Repeticiones</label>
+                <input type="text" class="form-control" name="ejercicios[{{ $i }}][repeticiones]" value="{{ $ejercicio->repeticiones }}">
+            </div>
+        </div>
+    @endforeach
+
+    <hr>
+    <h4>Agregar nuevos ejercicios</h4>
+
+    @for ($j = 0; $j < 3; $j++)
+        <div class="mb-3 border p-3 rounded">
+            <div class="mb-2">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nuevos_ejercicios[{{ $j }}][nombre]" placeholder="Nombre del ejercicio">
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Series</label>
+                <input type="text" class="form-control" name="nuevos_ejercicios[{{ $j }}][series]" placeholder="Series">
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Repeticiones</label>
+                <input type="text" class="form-control" name="nuevos_ejercicios[{{ $j }}][repeticiones]" placeholder="Repeticiones">
+            </div>
+        </div>
+    @endfor
+
     <button type="submit" class="btn btn-primary">Actualizar</button>
     <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancelar</a>
 </form>

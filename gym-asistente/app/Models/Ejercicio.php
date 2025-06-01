@@ -14,6 +14,6 @@ class Ejercicio extends Model
     ];
 
     public function dia() {
-        return $this->belongsTo(Dia::class);
+        return $this->belongsTo(\App\Models\Dia::class);
     }
 }

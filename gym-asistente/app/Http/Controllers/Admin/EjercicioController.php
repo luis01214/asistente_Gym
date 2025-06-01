@@ -42,10 +42,14 @@ class EjercicioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Dia $dia)
     {
-        //
+        $semanas = Semana::all();
+        $dia->load('ejercicios'); // Carga los ejercicios relacionados
+
+        return view('admin.dias.edit', compact('dia', 'semanas'));
     }
+
 
     /**
      * Update the specified resource in storage.

@@ -13,6 +13,6 @@ class Dia extends Model
     }
 
     public function ejercicios() {
-        return $this->hasMany(Ejercicio::class);
+        return $this->hasMany(\App\Models\Ejercicio::class);
     }
 }
