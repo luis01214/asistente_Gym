@@ -13,9 +13,7 @@ return new class extends Migration
     {
        Schema::create('dias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('semana_id')->constrained()->onDelete('cascade');
-            $table->string('nombre'); // Ej: Lunes
-            $table->string('grupo_muscular');
+            $table->string('nombre', 100);
             $table->timestamps();
         });
     }
