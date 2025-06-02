@@ -1,8 +1,5 @@
 <?php
+use App\Http\Controllers\UserController;
 
-use Illuminate\Support\Facades\Route;
-use App\Models\Ejercicio;
-
-Route::get('/ejercicios', function () {
-    return Ejercicio::all();
-});
+Route::get('/usuarios', [UserController::class, 'index']); // Listar usuarios (opcional)
+Route::post('/usuarios', [UserController::class, 'store']); // Crear usuario

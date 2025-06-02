@@ -1,20 +1,28 @@
 import streamlit as st
 import requests
 
-st.title("Asistente Virtual del Gimnasio")
+st.title("Registrar nuevo usuario")
 
-try:
-    # Asegúrate de que el backend esté corriendo y el endpoint exista
-    response = requests.get("http://127.0.0.1:8000/api/ejercicios")
-    response.raise_for_status()
-    data = response.json()
+name = st.text_input("Nombre")
+email = st.text_input("Correo electrónico")
+password = st.text_input("Contraseña", type="password")
 
-    for ejercicio in data:
-        st.subheader(ejercicio['nombre'])
-        st.write(f"Series: {ejercicio['series']}")
-        st.write(f"Repeticiones: {ejercicio['repeticiones']}")
-        st.write(f"Descanso: {ejercicio['descanso']}")
-except requests.exceptions.RequestException as e:
-    st.error(f"❌ Error de conexión: {e}")
-except ValueError as ve:
-    st.error(f"❌ La respuesta no es JSON válido: {ve}")
+if st.button("Enviar"):
+    if name and email and password:
+        data = {
+            "name": name,
+            "email": email,
+            "password": password
+        }
+        try:
+            response = requests.post("http://127.0.0.1:8000/api/usuarios", json=data)
+            if response.status_code == 201:
+                st.success("Usuario creado correctamente")
+                st.json(response.json())
+            else:
+                st.error(f"Error al crear usuario: {response.status_code}")
+                st.json(response.json())
+        except Exception as e:
+            st.error(f"Error de conexión: {e}")
+    else:
+        st.warning("Todos los campos son obligatorios")
